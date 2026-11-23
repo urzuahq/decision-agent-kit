@@ -20,11 +20,11 @@ Recorded Claude Code sessions on the development machine hold 8 real compactions
 
 | | Names | Share |
 |---|---|---|
-| Used after a compaction, and present before it | 674 | |
+| Used after a compaction, and present before it | 676 | |
 | In the harness's summary | 184 | 27% |
 | In a message the harness kept word for word | 18 | 3% |
-| Carried back by a later tool result or prompt first | 275 | 41% |
-| None of these | 197 | 29% |
+| Carried back by a later tool result or prompt first | 276 | 41% |
+| None of these | 198 | 29% |
 
 The summary is a narrative; it keeps few of the exact strings work continues with, and most of the rest reach the agent again through later tool output. Some of those calls would have happened anyway, so this bounds the waste rather than measuring it. That gap is what this feature targets. Unlike trimming, it does not have to guess at arrival what will matter: at compaction, the whole conversation so far is known.
 
