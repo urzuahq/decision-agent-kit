@@ -5,7 +5,7 @@
   "description": "Tooling for coding-agent harnesses to ask a decision model about the session: is the work really done? Claude Code and SubQ Snap today; more harnesses and models planned.",
   "license": "MIT",
   "type": "module",
-  "packageManager": "pnpm@12.18.0",
+  "packageManager": "pnpm@12.21.0",
   "engines": {
     "node": ">=24"
   },
