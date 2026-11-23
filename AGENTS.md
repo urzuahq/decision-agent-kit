@@ -13,6 +13,8 @@ accepted records before changing behaviour they cover.
   number a record by hand. `make records` must stay clean.
 - When a task starts or finishes, update its milestone's `Status` and that milestone's epic in the
   same change. `make records` fails when a parent's status disagrees with its children.
+- Work the maintainer has parked is `Paused`, on the task and on any milestone or epic that holds
+  only parked work. Resuming it is the maintainer's call.
 - Work is a task: `urzua new task "<the outcome>"`. Write its acceptance checks before code, add a step to its plan before starting it, and record evidence with the commit it ran against. `urzua roadmap` gives the order of work.
 - `urzua explain --types` prints the record types of this repository: their fields, allowed values,
   statuses, what each refers to and who may accept them. Read it before writing a record; RFC-3

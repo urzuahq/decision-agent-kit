@@ -171,6 +171,7 @@ record_types:
         - InProgress
         - Done
         - WontDo
+        - Paused
       success:
         - Done
       failure:
@@ -184,12 +185,18 @@ record_types:
           - InProgress
           - Done
           - WontDo
+          - Paused
         InProgress:
           - Open
           - Done
           - WontDo
+          - Paused
         Done:
           - InProgress
+        Paused:
+          - Open
+          - InProgress
+          - WontDo
       require:
         - when_field:
             Kind:
@@ -256,6 +263,7 @@ record_types:
         - InProgress
         - Done
         - WontDo
+        - Paused
       success:
         - Done
       failure:
@@ -269,12 +277,18 @@ record_types:
           - InProgress
           - Done
           - WontDo
+          - Paused
         InProgress:
           - Planned
           - Done
           - WontDo
+          - Paused
         Done:
           - InProgress
+        Paused:
+          - Planned
+          - InProgress
+          - WontDo
   epic:
     dir: docs/epic
     prefix: EPIC
@@ -298,6 +312,7 @@ record_types:
         - Active
         - Done
         - Dropped
+        - Paused
       success:
         - Done
       failure:
@@ -310,12 +325,18 @@ record_types:
         Planned:
           - Active
           - Dropped
+          - Paused
         Active:
           - Planned
           - Done
           - Dropped
+          - Paused
         Done:
           - Active
+        Paused:
+          - Planned
+          - Active
+          - Dropped
 relation_pairs:
   - name: sequencing
     forward: Depends-on

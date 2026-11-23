@@ -1,6 +1,6 @@
 ---
 Stable-Id: 01M7KN17SHRPXG8SVXT04C4VG8
-Status: Open
+Status: Paused
 Date: 2026-11-17
 Author: beauwilliams
 Kind: feature
