@@ -25,4 +25,4 @@ A spec defines what compaction scores, the questions it asks, the guards and the
 
 ## Evidence
 
-2026-11-23, branch `compaction-spec`. SPEC-4 (Draft) written from the harness documentation for Claude Code 2.1.323 and Codex 0.167.2 and from a count over the 8 real compactions in recorded sessions (`docs/evidence/TASK-8/native-compaction-losses.txt`): the harness's summaries kept 28% of the names later work used, and 44% came back through a later tool result.
+2026-11-23, branch `compaction-spec`. SPEC-4 (Draft) written from the harness documentation for Claude Code 2.1.323 and Codex 0.167.2 and from a count over the 8 real compactions in recorded sessions (`docs/evidence/TASK-8/native-compaction-losses.txt`): the harness's summaries held 27% of the names later work used, and 41% came back through a later tool result first (`node eval/compaction-losses.ts`).
