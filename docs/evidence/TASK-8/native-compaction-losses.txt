@@ -1,0 +1,33 @@
+2026-11-23, `node eval/compaction-losses.ts`. Recorded Claude Code sessions on the development
+machine, main conversation only. Counts only; no session text is stored here.
+
+Real compactions found: 8, in 5 sessions (7 manual, 1 automatic).
+
+A "name" is a string of 12+ characters from [A-Za-z0-9_./:-] holding a letter and a digit or one
+of _./- (paths, identifiers, hashes, flags), as in eval/trim-measure.ts. For each compaction, every
+name that existed before it and that the agent used after it (its text and tool inputs, up to the
+next compaction) is counted once, by the first of these that held at its first use after the
+compaction: it was in the summary; it was in a message the harness kept word for word
+(compactMetadata.preservedMessages); a tool result or prompt after the compaction carried it first
+("refetched"); none of these ("unexplained").
+
+| Trigger | Tokens before -> after | Summary chars | Used after, existed before | In summary | In kept messages | Refetched | Unexplained |
+|---|---|---|---|---|---|---|---|
+| manual | 321523 -> 20659 | 24188 | 156 | 39 | 2 | 73 | 42 |
+| manual | 397256 -> 13115 | 24737 | 173 | 52 | 2 | 79 | 40 |
+| manual | 406384 -> 10320 | 15664 | 73 | 14 | 2 | 25 | 32 |
+| manual | 202822 -> 11055 | 15292 | 25 | 9 | 7 | 4 | 5 |
+| manual | 295838 -> 20736 | 15998 | 66 | 8 | 0 | 34 | 24 |
+| manual | 230221 -> 12183 | 14820 | 13 | 1 | 0 | 6 | 6 |
+| manual | 282123 -> 9961 | 12642 | 91 | 22 | 2 | 36 | 31 |
+| auto | 367273 -> 13926 | 16036 | 79 | 39 | 3 | 19 | 18 |
+| Total (8) | | | 676 | 184 (27%) | 18 (3%) | 276 (41%) | 198 (29%) |
+
+Limits:
+- "Refetched" means a later tool result or prompt carried the name before the agent used it; the
+  agent may have fetched it for another reason.
+- "Unexplained" includes names the agent rebuilt itself (a path it could construct) and names it
+  had from somewhere this count does not see. It is not a count of errors.
+- What the agent used after a compaction was shaped by the summary it got, which favours the
+  summary in this count.
+- Eight compactions, seven of them manual, from one person's sessions.
