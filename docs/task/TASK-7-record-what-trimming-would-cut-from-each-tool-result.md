@@ -1,6 +1,6 @@
 ---
 Stable-Id: 01M7KN15VZVMQFP0NH220V1QC9
-Status: InProgress
+Status: Paused
 Date: 2026-11-17
 Author: beauwilliams
 Kind: feature

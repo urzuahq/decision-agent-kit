@@ -12,7 +12,8 @@ const out = execFileSync('urzua', ['export', '--format', 'json', '--no-text'], {
   maxBuffer: 64 * 1024 * 1024,
 });
 const records = (JSON.parse(out) as { records: ExportedRecord[] }).records;
-const stale = records.filter((r) => r.state_disagrees_with_children);
+// urzua has no role for a paused status, so it counts Paused as not started and flags a paused parent with finished children.
+const stale = records.filter((r) => r.state_disagrees_with_children && r.status !== 'Paused');
 for (const r of stale) {
   const counts = Object.entries(r.children_by_state)
     .filter(([, n]) => n > 0)
