@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
+  group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' }}
 
 permissions:
@@ -17,7 +17,7 @@ permissions:
 jobs:
   checks:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -50,16 +50,22 @@ jobs:
           base-ref: ${{ github.base_ref }}
           actors: 'true'
 
-  ci:
-    if: always()
-    needs: [checks, records]
+  workflow-lint:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Require every job to have passed
-        env:
-          CHECKS: ${{ needs.checks.result }}
-          RECORDS: ${{ needs.records.result }}
-        run: |
-          test "$CHECKS" = "success"
-          test "$RECORDS" = "success"
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: urzuahq/platform/ci/actions/workflow-lint@ca5f32b64440d25e461701b78794ac16c652ae4b # v0.3.0
+
+  ci:
+    name: ci
+    needs: [checks, records, workflow-lint]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: urzuahq/platform/ci/actions/ci-gate@ca5f32b64440d25e461701b78794ac16c652ae4b # v0.3.0
+        with:
+          needs: ${{ toJSON(needs) }}
